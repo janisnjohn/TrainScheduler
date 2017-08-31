@@ -15,8 +15,10 @@
   <h1>Anytime is Traintime</h1>
   <h3>Your one stop place for your train schedule</h3>
   </div>
-  <div class="panel panel-heading">
+  <div class="panel panel-primary">
+  <div class="panel-heading">
   <h3 class="panel-title"><strong>Current Train Schedule</strong></h3>
+  </div>
   <div class="panel panel-body">
     <table class="table table-hover" id="train-table">
     <thead>
@@ -30,20 +32,18 @@
     </thead>
     <tbody>
       <tr>
-        <td id="name-display"></td>
-        <td id="destination-display"></td>
-        <td id="frequency-display"></td>
-        <td id="nextArrival-display"></td>
-        <td id="minutesAway-display"></td>
+        <td></td>
+
       </tr>
     </tbody>
     </table>
   </div>
   </div>
-  <div class="panel panel-heading">
-    <h4><strong>Add Train</strong></h4>
+  <div class="panel panel-primary"> 
+  <div class="panel-heading">
+    <h3 class="panel-title"><strong>Add Train</strong></h3>
   </div>
-  <div class="panel panel-default">
+  <div class="panel-body">
             <form role="form">
               <div class="form-group">
                 <label for="name-input">Train Name:</label>
@@ -61,8 +61,9 @@
                 <label for="frequency-input">Frequency</label>
                 <input class="form-control" id="frequency-input" type="text"></input>
               </div>
-              <button class="btn btn-default" id="add-train" type="submit">Submit</button>
+              <button class="btn btn-primary" id="add-train" type="submit">Submit</button>
             </form>
+    </div>
   </div>
 </div>
   
@@ -90,12 +91,6 @@ $(document).ready(function(){
 
   var database = firebase.database();
 
-  // var name ="";
-  // var destination ="";
-  // var firstTraintime ="";
-  // var frequency = "";
-  // var currentTime = moment();
-  // console.log("current time: " + currentTime);
 
   $("#add-train").on("click", function() {
       // Prevent the page from refreshing
@@ -108,17 +103,6 @@ $(document).ready(function(){
     console.log("starting time: " + firstTraintime);
     frequency =$("#frequency-input").val().trim();
 
-    // var firstTimeConverted = moment(firstTraintime).subtract(1, "years");
-    // console.log(firstTimeConverted);
-    // var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-    // console.log("DIFFERENCE IN TIME: " + diffTime);
-    // var tRemainder = diffTime % frequency;
-    // console.log(tRemainder);
-    // var tMinutesTillTrain = frequency - tRemainder;
-    // console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
-    // var nextTrain = moment().add(tMinutesTillTrain, "minutes");
-    // console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
-
     var newTrain = {
       name: trainName,
       destination: destination,
@@ -129,19 +113,10 @@ $(document).ready(function(){
 
   database.ref().push(newTrain);
 
-  console.log(newTrain.name);
-  console.log(newTrain.destination); 
-  console.log(firstTraintime);
-  console.log(newTrain.frequency)
-
-    // name: name,
-    // destination: destination,
-    // firstTraintime: firstTraintime,
-    // frequency: frequency
-    // nextTrain: nextTrain,
-    // tMinutesTillTrain: tMinutesTillTrain
-    //time stamp in UNIX
-    // dateAdded: firebase.database.ServerValue.TIMESTAMP 
+  // console.log(newTrain.name);
+  // console.log(newTrain.destination); 
+  // console.log(firstTraintime);
+  // console.log(newTrain.frequency)
 
   $("#name-input").val("");
   $("#destination-input").val("");
@@ -181,32 +156,16 @@ $(document).ready(function(){
   var tArrival = moment().add(tMinutes, "m").format("hh:mm A"); 
 
       // Log everything that's coming out of result
-      console.log(tName);
-      console.log(tDestination);
-      console.log(tArrival);
-      console.log(tFrequency);
-      console.log(tMinutes);
-
-      // $("#full-member-list").append("<div class='well'><span id='name'> " + childSnapshot.val().name +
-      //   " </span><span id='email'> " + childSnapshot.val().email +
-      //   " </span><span id='age'> " + childSnapshot.val().age +
-      //   " </span><span id='comment'> " + childSnapshot.val().comment + " </span></div>");
-    // Handle the errors
-
-      // $("#name-display").append(tName);
-      // $("#destination-display").append(tDestination);
-      // $("#frequency-display").append(tFrequency);
-      // $("#nextArrival-display").append(tArrival);
-      // $("#minutesAway-display").append(tMinutes);
+      // console.log(tName);
+      // console.log(tDestination);
+      // console.log(tArrival);
+      // console.log(tFrequency);
+      // console.log(tMinutes);
 
     $("#train-table > tbody").append("<tr><td>" + tName + "</td><td>" + tDestination + "</td><td>" + tFrequency + "</td><td>" + tArrival + "</td><td>" + tMinutes + "</td></tr>");
   });
   });
 });
-
-//       $("#train-table > tbody").append("<tr><td>" + Name + "</td><td>" + destination + "</td><td>" +
-//   firstTraintime + "</td><td>" + frequency + "</td></tr>");
-// });
 
 
 </script>
